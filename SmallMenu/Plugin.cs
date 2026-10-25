@@ -1,17 +1,21 @@
-﻿using IPA;
+using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
 using IPA.Logging;
 using SiraUtil.Zenject;
+using SmallMenu.Configuration;
+using SmallMenu.Installers;
 
-namespace SmallMenu;
-
-[Plugin(RuntimeOptions.SingleStartInit)]
-public class Plugin
+namespace SmallMenu
 {
-    [Init]
-    public Plugin(Zenjector zenjector, Logger logger, Config config)
+    [Plugin(RuntimeOptions.DynamicInit), NoEnableDisable]
+    public class Plugin
     {
-        zenjector.Install<SmallMenuInstaller>(Location.Menu, logger, config.Generated<Settings>());
+        [Init]
+        public Plugin(Zenjector zenjector, Logger logger, Config config)
+        {
+            zenjector.UseLogger(logger);
+            zenjector.Install<SmallMenuInstaller>(Location.Menu, config.Generated<Settings>());
+        }
     }
 }
