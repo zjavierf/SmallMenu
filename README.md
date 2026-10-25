@@ -1,4 +1,11 @@
 # Small Menu
+
+# What this fork does:
+* Adds a setting to change the PosY of the UI
+* Minor code cleanups
+
+---
+
 Makes the main menu smaller & closer, just like it was in Beat Saber 1.13.0. By default, this means scaling the menu down to 1.0 instead of 1.5, but you can also manually adjust the scale from 0.5 to 2.0 in *Options* > *Mod Settings* > *SmallMenu*.
 
 ## Comparison
