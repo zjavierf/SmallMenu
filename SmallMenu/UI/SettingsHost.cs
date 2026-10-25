@@ -1,16 +1,17 @@
-﻿using System;
+using System;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components.Settings;
 using BeatSaberMarkupLanguage.Settings;
+using SmallMenu.Configuration;
 using UnityEngine;
 using Zenject;
 
-namespace SmallMenu;
+namespace SmallMenu.UI;
 
 internal class SettingsHost : IInitializable, IDisposable
 {
     [UIValue("scale-options")]
-    internal readonly MenuScale[] scaleOptions = [MenuScale.Big, MenuScale.Default, MenuScale.Small, MenuScale.Tiny, MenuScale.Custom];
+    internal readonly MenuScale[] ScaleOptions = [MenuScale.Big, MenuScale.Default, MenuScale.Small, MenuScale.Tiny, MenuScale.Custom];
 
     [UIObject("custom-scale")]
     internal GameObject customScaleObject;
@@ -28,33 +29,40 @@ internal class SettingsHost : IInitializable, IDisposable
     }
 
     [UIValue("custom-scale-active")]
-    internal bool customScaleActive => scale == MenuScale.Custom;
+    internal bool CustomScaleActive => Scale == MenuScale.Custom;
 
     [UIValue("custom-scale-value")]
-    internal float customScale
+    internal float CustomScale
     {
-        get => _settings.scale;
-        set => _settings.scale = value;
+        get => _settings.Scale;
+        set => _settings.Scale = value;
+    }
+
+    [UIValue("pos-y-value")]
+    internal float PosY
+    {
+        get => _settings.PosY;
+        set => _settings.PosY = value;
     }
 
     [UIValue("scale-value")]
-    internal MenuScale scale
+    internal MenuScale Scale
     {
         get
         {
-            if (Mathf.Approximately(_settings.scale, 1.5f))
+            if (Mathf.Approximately(_settings.Scale, 1.5f))
             {
                 return MenuScale.Default;
             }
-            else if (Mathf.Approximately(_settings.scale, 2f))
+            else if (Mathf.Approximately(_settings.Scale, 2f))
             {
                 return MenuScale.Big;
             }
-            else if (Mathf.Approximately(_settings.scale, 1f))
+            else if (Mathf.Approximately(_settings.Scale, 1f))
             {
                 return MenuScale.Small;
             }
-            else if (Mathf.Approximately(_settings.scale, 0.5f))
+            else if (Mathf.Approximately(_settings.Scale, 0.5f))
             {
                 return MenuScale.Tiny;
             }
@@ -68,24 +76,24 @@ internal class SettingsHost : IInitializable, IDisposable
             switch (value)
             {
                 case MenuScale.Default:
-                    _settings.scale = 1.5f;
+                    _settings.Scale = 1.5f;
                     break;
 
                 case MenuScale.Big:
-                    _settings.scale = 2f;
+                    _settings.Scale = 2f;
                     break;
 
                 case MenuScale.Small:
-                    _settings.scale = 1f;
+                    _settings.Scale = 1f;
                     break;
 
                 case MenuScale.Tiny:
-                    _settings.scale = 0.5f;
+                    _settings.Scale = 0.5f;
                     break;
             }
 
             customScaleObject.SetActive(value == MenuScale.Custom);
-            customScaleSetting.Value = _settings.scale;
+            customScaleSetting.Value = _settings.Scale;
         }
     }
 
