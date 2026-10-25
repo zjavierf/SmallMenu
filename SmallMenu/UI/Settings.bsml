@@ -1,4 +1,5 @@
-﻿<scrollable-settings-container>
+<scrollable-settings-container>
   <dropdown-list-setting text="Scale" value="scale-value" apply-on-change="true" options="scale-options" formatter="scale-formatter" />
-  <slider-setting id="custom-scale" text="Custom Scale" min="0.5" max="2" value="custom-scale-value" apply-on-change="true" active="~custom-scale-active" />
+  <slider-setting id="custom-scale" text="Custom Scale" min="0.1" max="2" show-buttons="true" value="custom-scale-value" apply-on-change="true" active="~custom-scale-active" />
+  <slider-setting text="Y Position Offset" min="-0.5" max="0.5" increment="0.05" show-buttons="true" value="pos-y-value" apply-on-change="true" />
 </scrollable-settings-container>
